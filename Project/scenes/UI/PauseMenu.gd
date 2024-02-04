@@ -18,7 +18,7 @@ func _ready():
 	options_button.pressed.connect(options)
 	back_button.pressed.connect(back)
 	restart_button.pressed.connect(restart)
-	continue_button.pressed.connect(next)
+	continue_button.pressed.connect(continu)
 
 func back():
 	AudioManager.PlayStream("select")
@@ -28,14 +28,19 @@ func back():
 	animator.play("PauseComing")
 	pause_menu.show()
 
-func next():
+func continu():
 	AudioManager.PlayStream("select")
+	animator.play("DataSheetClosed")
+	data_sheet.hide()
+
+func next():
 	animator.play("DataSheetClosed")
 	data_sheet.hide()
 
 func open_data():
 	animator.play("DataSheetOpened")
 	data_sheet.show()
+	continue_button.grab_focus()
 	
 	
 func options():
@@ -59,6 +64,7 @@ func unpause():
 func pause():
 	animator.play("Pause")
 	pause_menu.show()
+	play_button.grab_focus()
 	get_tree().paused = true
 	play_button.mouse_filter = Control.MOUSE_FILTER_STOP
 	quit_button.mouse_filter = Control.MOUSE_FILTER_STOP
